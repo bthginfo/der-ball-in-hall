@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const canvas = document.getElementById('particles');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
-  let w, h, mouse = { x: -999, y: -999 };
+  let w, h, mouse = { x: -999, y: -999 }, smoothMouse = { x: 0.5, y: 0.45 };
 
   function resize() {
     const rect = canvas.parentElement.getBoundingClientRect();
@@ -71,6 +71,15 @@ document.addEventListener('DOMContentLoaded', () => {
     update(t) {
       this.x += this.vx + Math.sin(t * 0.0003 + this.phase) * 0.3;
       this.y += this.vy + Math.cos(t * 0.0002 + this.phase) * 0.2;
+      // Gentle pull toward mouse
+      if (mouse.x > 0) {
+        const dx = mouse.x - this.x, dy = mouse.y - this.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < this.r * 2 && dist > 1) {
+          this.x += dx * 0.002;
+          this.y += dy * 0.002;
+        }
+      }
       if (this.x < -this.r) this.x = w + this.r;
       if (this.x > w + this.r) this.x = -this.r;
       if (this.y < -this.r) this.y = h + this.r;
@@ -145,13 +154,22 @@ document.addEventListener('DOMContentLoaded', () => {
   let t = 0;
   function animate() {
     t++;
+    // Smooth mouse interpolation
+    if (mouse.x > 0) {
+      smoothMouse.x += (mouse.x / w - smoothMouse.x) * 0.03;
+      smoothMouse.y += (mouse.y / h - smoothMouse.y) * 0.03;
+    } else {
+      smoothMouse.x += (0.5 - smoothMouse.x) * 0.01;
+      smoothMouse.y += (0.45 - smoothMouse.y) * 0.01;
+    }
+
     // Dark base
     ctx.fillStyle = '#0a0a0a';
     ctx.fillRect(0, 0, w, h);
 
-    // Central golden glow
+    // Central golden glow – follows mouse subtly
     ctx.globalCompositeOperation = 'lighter';
-    const cx = w * 0.5, cy = h * 0.45;
+    const cx = w * (0.35 + smoothMouse.x * 0.3), cy = h * (0.3 + smoothMouse.y * 0.3);
     const glowR = Math.max(w, h) * 0.5;
     const pulse = 0.85 + 0.15 * Math.sin(t * 0.008);
     const glow = ctx.createRadialGradient(cx, cy, 0, cx, cy, glowR);
@@ -175,6 +193,16 @@ document.addEventListener('DOMContentLoaded', () => {
     g3.addColorStop(1, 'rgba(0,0,0,0)');
     ctx.fillStyle = g3;
     ctx.fillRect(0, 0, w, h);
+
+    // Mouse glow – soft light following cursor
+    if (mouse.x > 0) {
+      const mg = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 220);
+      mg.addColorStop(0, 'rgba(212,175,55,0.06)');
+      mg.addColorStop(0.5, 'rgba(180,130,30,0.02)');
+      mg.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = mg;
+      ctx.fillRect(mouse.x - 220, mouse.y - 220, 440, 440);
+    }
 
     // Nebula blobs
     blobs.forEach(b => { b.update(t); b.draw(); });
