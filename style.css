@@ -328,18 +328,73 @@ a:hover { text-decoration: underline; }
     backdrop-filter: blur(20px);
   }
   .site-nav.is-open { display: flex; }
-  .site-nav a { padding: 12px 0; }
+  .site-nav a { padding: 12px 0; border-bottom: 1px solid var(--border); }
+  .site-nav a:last-child { border-bottom: none; }
+  .header-inner { padding: 12px 16px; }
+  .brand-script { font-size: 1.25rem; }
+  .brand-year { font-size: 1.25rem; }
+  .hero { min-height: 85vh; }
+  .hero-content { padding: 100px 16px 60px; }
+  .hero-kicker { font-size: 0.9rem; letter-spacing: 0.25em; margin-bottom: 16px; }
+  .hero-date { font-size: clamp(2.8rem, 13vw, 5rem); }
+  .hero-venue { font-size: 0.9rem; letter-spacing: 0.1em; }
+  .countdown { gap: 10px; margin-top: 32px; }
+  .cd strong { font-size: 1.5rem; }
+  .cd span { font-size: 0.65rem; }
+  .cd-past { font-size: 0.95rem; }
   .form-row { grid-template-columns: 1fr; }
-  .hero-date { font-size: clamp(3rem, 12vw, 5rem); }
-  .countdown { gap: 12px; }
-  .cd strong { font-size: 1.6rem; }
-  .ball-logo-text { font-size: 0.8em; }
+  .sec-title { font-size: 1.8rem; }
+  .sub-title { font-size: 1.4rem; }
+  .ball-logo-text { font-size: 0.7em; }
+  .blt-script, .blt-hall { font-size: 3rem; }
+  .blt-year { font-size: 2.2rem; }
+  .key-facts { font-size: 0.92rem; }
+  .tl { gap: 16px; flex-wrap: wrap; }
+  .tl-time { font-size: 1.2rem; min-width: 60px; }
+  .tl-text { font-size: 0.92rem; }
+  .ent-name { font-size: 0.95rem; }
+  .celebrate-banner { height: 200px; }
+  .celebrate-overlay p { font-size: 1.8rem; padding: 12px 24px; }
+  .info-box { padding: 20px; }
+  .info-box h3 { font-size: 1.25rem; }
+  .contact-card { padding: 20px; }
+  .day { padding: 20px 16px; }
+  .day h3 { font-size: 1.3rem; }
+  .price-card { padding: 16px 24px; }
+  .price-card span { font-size: 1.2rem; }
   .footer-inner { flex-direction: column; text-align: center; }
-  .footer-links { justify-content: center; }
+  .footer-links { justify-content: center; flex-wrap: wrap; }
+  .map-wrap iframe { height: 280px; }
+  .container { width: min(1100px, 100% - 24px); }
 }
 
 @media (max-width: 480px) {
-  .section { padding: 60px 16px; }
-  .logos-row img { width: 72px; height: 72px; }
-  .price-cards { flex-direction: column; align-items: center; }
+  .section { padding: 48px 12px; }
+  .hero { min-height: 80vh; }
+  .hero-content { padding: 90px 12px 48px; }
+  .hero-date { font-size: clamp(2.4rem, 15vw, 4rem); letter-spacing: 0.03em; }
+  .hero-kicker { font-size: 0.8rem; }
+  .hero-venue { font-size: 0.8rem; }
+  .countdown { gap: 8px; margin-top: 24px; flex-wrap: wrap; justify-content: center; }
+  .cd strong { font-size: 1.3rem; }
+  .sec-title { font-size: 1.5rem; }
+  .sec-title::after { width: 40px; }
+  .sub-title { font-size: 1.2rem; margin-top: 40px; }
+  .ball-logo-text { font-size: 0.55em; margin: 32px 0; }
+  .blt-script, .blt-hall { font-size: 2.5rem; }
+  .blt-year { font-size: 1.8rem; margin-left: 8px; }
+  .logos-row { gap: 16px; }
+  .logos-row img { width: 64px; height: 64px; padding: 6px; }
+  .schedule { gap: 12px; }
+  .price-cards { flex-direction: column; align-items: stretch; }
+  .price-card { text-align: center; }
+  .celebrate-banner { height: 160px; }
+  .celebrate-overlay p { font-size: 1.4rem; }
+  .tl-time { font-size: 1.1rem; }
+  .patrons, .ent-grid { font-size: 0.9rem; }
+  .prose { font-size: 0.92rem; }
+  .form-group input, .form-group select, .form-group textarea { padding: 12px; font-size: 0.95rem; }
+  .btn { padding: 12px 24px; font-size: 0.95rem; }
+  .map-wrap iframe { height: 220px; }
+  .container { width: min(1100px, 100% - 16px); }
 }
