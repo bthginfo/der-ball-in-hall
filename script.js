@@ -54,18 +54,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Nebula blobs – large soft shapes that drift slowly
   const blobs = [];
-  const BLOB_COUNT = 6;
+  const BLOB_COUNT = 12;
   class Blob {
     constructor() {
       this.x = Math.random() * 1600;
       this.y = Math.random() * 1000;
-      this.r = 200 + Math.random() * 300;
-      this.vx = (Math.random() - 0.5) * 0.2;
-      this.vy = (Math.random() - 0.5) * 0.15;
-      this.hue = 30 + Math.random() * 20;
-      this.sat = 50 + Math.random() * 30;
-      this.light = 15 + Math.random() * 20;
-      this.alpha = 0.04 + Math.random() * 0.06;
+      this.r = 250 + Math.random() * 400;
+      this.vx = (Math.random() - 0.5) * 0.25;
+      this.vy = (Math.random() - 0.5) * 0.18;
+      this.hue = 28 + Math.random() * 25;
+      this.sat = 55 + Math.random() * 35;
+      this.light = 18 + Math.random() * 25;
+      this.alpha = 0.06 + Math.random() * 0.1;
       this.phase = Math.random() * Math.PI * 2;
     }
     update(t) {
@@ -87,13 +87,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Particles – golden sparkles
   const particles = [];
-  const P_COUNT = 90;
+  const P_COUNT = 140;
   class Particle {
     constructor() { this.spawn(true); }
     spawn(init) {
       this.x = Math.random() * (w || 1400);
       this.y = init ? Math.random() * (h || 900) : (h || 900) + 10;
-      this.r = Math.random() * 2.2 + 0.4;
+      this.r = Math.random() * 2.8 + 0.5;
       this.vx = (Math.random() - 0.5) * 0.25;
       this.vy = -(Math.random() * 0.5 + 0.1);
       this.alpha = Math.random() * 0.7 + 0.1;
@@ -149,8 +149,34 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx.fillStyle = '#0a0a0a';
     ctx.fillRect(0, 0, w, h);
 
-    // Nebula blobs
+    // Central golden glow
     ctx.globalCompositeOperation = 'lighter';
+    const cx = w * 0.5, cy = h * 0.45;
+    const glowR = Math.max(w, h) * 0.5;
+    const pulse = 0.85 + 0.15 * Math.sin(t * 0.008);
+    const glow = ctx.createRadialGradient(cx, cy, 0, cx, cy, glowR);
+    glow.addColorStop(0, 'rgba(180,140,40,' + (0.12 * pulse) + ')');
+    glow.addColorStop(0.3, 'rgba(140,90,20,' + (0.06 * pulse) + ')');
+    glow.addColorStop(0.6, 'rgba(80,40,10,' + (0.03 * pulse) + ')');
+    glow.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = glow;
+    ctx.fillRect(0, 0, w, h);
+
+    // Secondary warm accent glow (top-right)
+    const g2 = ctx.createRadialGradient(w * 0.8, h * 0.15, 0, w * 0.8, h * 0.15, glowR * 0.6);
+    g2.addColorStop(0, 'rgba(160,100,30,' + (0.07 * pulse) + ')');
+    g2.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = g2;
+    ctx.fillRect(0, 0, w, h);
+
+    // Third accent (bottom-left)
+    const g3 = ctx.createRadialGradient(w * 0.15, h * 0.85, 0, w * 0.15, h * 0.85, glowR * 0.5);
+    g3.addColorStop(0, 'rgba(120,70,20,' + (0.05 * pulse) + ')');
+    g3.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = g3;
+    ctx.fillRect(0, 0, w, h);
+
+    // Nebula blobs
     blobs.forEach(b => { b.update(t); b.draw(); });
 
     // Connecting lines
