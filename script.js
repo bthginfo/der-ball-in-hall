@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!BALL_COUNTDOWN_TARGET_ISO) {
       cd.classList.add('countdown--message');
       cd.innerHTML =
-        '<p class="cd-tbd">Sobald <strong>Datum</strong> und <strong>Ort</strong> für den Ball 2027 feststehen, erscheint hier der Countdown.</p>';
+        '<p class="cd-tbd">Der Countdown startet mit der Bekanntgabe des Balldatums.</p>';
     } else {
       const target = new Date(BALL_COUNTDOWN_TARGET_ISO);
       function tick() {
