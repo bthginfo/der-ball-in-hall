@@ -67,10 +67,10 @@ document.addEventListener('DOMContentLoaded', () => {
       this.r = 250 + Math.random() * 400;
       this.vx = (Math.random() - 0.5) * 0.25;
       this.vy = (Math.random() - 0.5) * 0.18;
-      this.hue = 0 + Math.random() * 12;
-      this.sat = 65 + Math.random() * 30;
-      this.light = 22 + Math.random() * 22;
-      this.alpha = 0.07 + Math.random() * 0.1;
+      this.hue = 28 + Math.random() * 25;
+      this.sat = 55 + Math.random() * 35;
+      this.light = 18 + Math.random() * 25;
+      this.alpha = 0.06 + Math.random() * 0.1;
       this.phase = Math.random() * Math.PI * 2;
     }
     update(t) {
@@ -113,9 +113,9 @@ document.addEventListener('DOMContentLoaded', () => {
       this.pulse = Math.random() * 0.025 + 0.005;
       this.offset = Math.random() * Math.PI * 2;
       this.life = 0;
-      const hs = Math.random() * 18 - 8;
-      this.hue = 48 + hs;
-      this.lightness = 52 + Math.random() * 18;
+      const hs = Math.random() * 20 - 10;
+      this.hue = 43 + hs;
+      this.lightness = 55 + Math.random() * 20;
     }
     update(t) {
       this.life++;
@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (this.y < -10 || this.x < -20 || this.x > w + 20) this.spawn(false);
     }
     draw() {
-      const col = 'hsla(' + this.hue + ',70%,' + this.lightness + '%,';
+      const col = 'hsla(' + this.hue + ',75%,' + this.lightness + '%,';
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
       ctx.fillStyle = col + this.alpha + ')';
@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
       smoothMouse.y += (0.45 - smoothMouse.y) * 0.01;
     }
 
-    ctx.fillStyle = '#141416';
+    ctx.fillStyle = '#0a0a0a';
     ctx.fillRect(0, 0, w, h);
 
     ctx.globalCompositeOperation = 'lighter';
@@ -173,29 +173,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const glowR = Math.max(w, h) * 0.5;
     const pulse = 0.85 + 0.15 * Math.sin(t * 0.008);
     const glow = ctx.createRadialGradient(cx, cy, 0, cx, cy, glowR);
-    glow.addColorStop(0, 'rgba(139,0,0,' + (0.14 * pulse) + ')');
-    glow.addColorStop(0.35, 'rgba(90,10,10,' + (0.07 * pulse) + ')');
-    glow.addColorStop(0.65, 'rgba(40,8,8,' + (0.04 * pulse) + ')');
+    glow.addColorStop(0, 'rgba(180,140,40,' + (0.12 * pulse) + ')');
+    glow.addColorStop(0.3, 'rgba(140,90,20,' + (0.06 * pulse) + ')');
+    glow.addColorStop(0.6, 'rgba(80,40,10,' + (0.03 * pulse) + ')');
     glow.addColorStop(1, 'rgba(0,0,0,0)');
     ctx.fillStyle = glow;
     ctx.fillRect(0, 0, w, h);
 
-    const g2 = ctx.createRadialGradient(w * 0.82, h * 0.12, 0, w * 0.82, h * 0.12, glowR * 0.55);
-    g2.addColorStop(0, 'rgba(120,30,30,' + (0.08 * pulse) + ')');
+    const g2 = ctx.createRadialGradient(w * 0.8, h * 0.15, 0, w * 0.8, h * 0.15, glowR * 0.6);
+    g2.addColorStop(0, 'rgba(160,100,30,' + (0.07 * pulse) + ')');
     g2.addColorStop(1, 'rgba(0,0,0,0)');
     ctx.fillStyle = g2;
     ctx.fillRect(0, 0, w, h);
 
-    const g3 = ctx.createRadialGradient(w * 0.12, h * 0.88, 0, w * 0.12, h * 0.88, glowR * 0.45);
-    g3.addColorStop(0, 'rgba(80,20,20,' + (0.05 * pulse) + ')');
+    const g3 = ctx.createRadialGradient(w * 0.15, h * 0.85, 0, w * 0.15, h * 0.85, glowR * 0.5);
+    g3.addColorStop(0, 'rgba(120,70,20,' + (0.05 * pulse) + ')');
     g3.addColorStop(1, 'rgba(0,0,0,0)');
     ctx.fillStyle = g3;
     ctx.fillRect(0, 0, w, h);
 
     if (mouse.x > 0) {
       const mg = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 220);
-      mg.addColorStop(0, 'rgba(176,16,16,0.08)');
-      mg.addColorStop(0.5, 'rgba(100,10,10,0.03)');
+      mg.addColorStop(0, 'rgba(212,175,55,0.06)');
+      mg.addColorStop(0.5, 'rgba(180,130,30,0.02)');
       mg.addColorStop(1, 'rgba(0,0,0,0)');
       ctx.fillStyle = mg;
       ctx.fillRect(mouse.x - 220, mouse.y - 220, 440, 440);
@@ -214,7 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
           ctx.beginPath();
           ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = 'rgba(200,170,100,' + a + ')';
+          ctx.strokeStyle = 'rgba(212,175,55,' + a + ')';
           ctx.lineWidth = 0.5;
           ctx.stroke();
         }

@@ -7,17 +7,16 @@
 1. [index.html](index.html) im Browser öffnen, oder
 2. Im Projektordner einen lokalen Server starten und z. B. `http://localhost:8000` aufrufen.
 
-## Assets
+## Logo Round Table 18
 
-- **Club-Logo RT18:** Lege die Datei **`Logo-RT18.jpeg`** im **gleichen Ordner** wie `index.html` ab (Repository-Root). Die Seite verweist darauf; ohne Datei zeigt der Browser ein leeres Bildfeld.
-- Für eine saubere Freistellung ist langfristig ein **PNG mit Transparenz** empfohlen. Bis dahin nutzt die Seite eine einheitliche dunkle Logo-Fläche und `mix-blend-mode: lighten` für das JPEG (Wirkung hängt vom Motiv ab).
+Die Datei **`logo-rt18-innsbruck.png`** liegt im gleichen Ordner wie `index.html`. Bei einem weißen Bildhintergrund kann später eine PNG-Version mit Transparenz eingetauscht werden.
 
 ## Countdown
 
-Sobald **Datum und Uhrzeit** feststehen, in [script.js](script.js) die Konstante `BALL_COUNTDOWN_TARGET_ISO` setzen, z. B. `'2027-01-17T19:00:00+01:00'`. Solange der Wert `null` ist, erscheint der Hinweistext statt des Countdowns.
+In [script.js](script.js) die Konstante `BALL_COUNTDOWN_TARGET_ISO` setzen (ISO-Datum/Uhrzeit), sobald der Balltermin fix ist — z. B. `'2027-01-17T19:00:00+01:00'`. Bei `null` erscheint der Hinweistext statt des Countdowns.
 
 ## Dateien
 
 - [index.html](index.html) — Struktur und Inhalte
-- [style.css](style.css) — Layout, Farben (#8B0000, Weiß, Dunkelgrau)
+- [style.css](style.css) — Layout (dunkles Theme, Goldakzente)
 - [script.js](script.js) — Menü, Countdown, Hero-Canvas
